@@ -1,0 +1,15 @@
+---
+- name: display IP
+  hosts: ansible-2
+  strategy: debug
+  tasks:
+    - name: Display current host variables
+      debug: msg="{{hostvars[ansible_memfree_mb]}}"
+
+    - name: capture output
+      command: whoami
+      register: login
+
+    - name: display the login variable
+      debug: var=loginn
+
