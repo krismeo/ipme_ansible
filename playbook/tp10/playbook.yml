@@ -1,0 +1,37 @@
+---
+- name: Test vars
+  hosts: all
+  become: true
+  tasks:
+    - user:
+        name: user1
+        shell: /bin/bash
+
+    - user:
+        name: user2
+        shell: /bin/bash
+
+    - name: create directory
+      file:
+        path: /home/user1/.ssh
+        state: directory
+
+    - name: create directory
+      file:
+        path: /home/user2/.ssh
+        state: directory
+
+
+    - name: Copy txt files on the remote nodes
+      copy:
+        src: "{{ item }}"
+        dest: "/home/user1/.ssh/"
+      with_fileglob:
+        - "/etc/ansible/playbook/tp10/cle/id_rsa.pub"
+ 
+    - name: Copy txt files on the remote nodes
+      copy:
+        src: "{{ item }}"
+        dest: "/home/user1/.ssh/"
+      with_fileglob:
+        - "/etc/ansible/playbook/tp10/cle/authorized_keys" 

@@ -1,0 +1,12 @@
+---
+- name: Test vars
+  hosts: all
+  become: true
+  tasks:
+    - user:
+        name: user1
+        shell: /bin/bash
+    - user:
+        name: user2
+        shell: /bin/bash
+    

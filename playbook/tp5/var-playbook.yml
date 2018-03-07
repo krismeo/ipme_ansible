@@ -1,0 +1,25 @@
+--- 
+- name: "test 5" 
+  hosts: ansible-1
+  tasks:
+    - name: test
+      command: /opt/myprog
+      ignore_errors: true
+      name: "run a a command"
+      register: result
+
+    - debug: var=result
+
+    - debug: msg="{{result | to_nice_json(indent=2)}}"
+
+    - shell: cat /etc/ansible/file.json
+      register: result
+
+    - debug: var=result
+
+    - set_fact: myvar="{{ result.stdout | from_json }}"
+
+    - debug: var=myvar
+
+    - debug: msg="Fail if myprog failed"
+      failed_when: "result | failed"

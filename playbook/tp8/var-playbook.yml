@@ -1,0 +1,24 @@
+--- 
+- name: "test 5" 
+  hosts: ansible-1
+  
+  vars:
+      url: "http://root:azerty@exemple.com:8080/exemples/index.html?lang=fr#part2"
+
+  tasks:
+  - debug: msg={{url | urlsplit('hostname')}}
+  - debug: msg={{url | urlsplit('netloc')}}
+  - debug: msg={{url | urlsplit('username')}}
+  - debug: msg={{url | urlsplit('password')}}
+  - debug: msg={{url | urlsplit('path')}}
+  - debug: msg={{url | urlsplit('hostname')}}
+  - debug: msg={{url | urlsplit('port')}}
+  - debug: msg={{url | urlsplit('scheme')}}
+  - debug: msg={{url | urlsplit('fragment')}}
+
+  - debug: msg={{'Ansible is a great Infrastructure as Code solution.' | regex_search('(Infrastructure)') }}
+  - debug: msg={{'Ansible is a great Infrastructure as Code solution.' | regex_search('(Chef)') }}
+  - debug: msg={{'Ansible is a great Infrastructure as Code solution. Ansible is owned by Red Hat' | regex_findall('(Ansible)') }}
+  - debug: msg={{'foobar' | regex_replace('^f.*o(.*)$', 'I drink a beer in a \\1') }}
+  - debug: msg={{'localhost 80' | regex_replace('^(?P<host>.+) (?P<port>\\d+)$', 'http://\\g<host>:\\g<port>') }}
+

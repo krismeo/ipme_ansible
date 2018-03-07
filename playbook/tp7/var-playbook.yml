@@ -1,0 +1,17 @@
+--- 
+- name: "test 5" 
+  hosts: ansible-1
+  tasks:
+  - name: display hash
+    debug: msg={{'christophe' |hash('sha512')}}
+  - name: display checksum
+    debug: msg={{'christophe' | checksum }}
+  - name: display hash
+    debug: msg={{'christophe' |password_hash('sha512')}}
+
+  - name: display page
+    debug: msg={{'http://docs.ansible.com/ansible/latest/playbooks_filters.html' | basename }}
+  - name: display dir
+    debug: msg={{'http://docs.ansible.com/ansible/latest/playbooks_filters.html' | dirname }}
+  - name: display relpath
+    debug: msg={{'http://docs.ansible.com/ansible/latest/playbooks_filters.html' | relpath('ansible') }}

@@ -1,0 +1,10 @@
+---
+- name: Test vars
+  hosts: ansible-1
+  vars: 
+    foo: bar
+  tasks:
+  - name: display var
+    debug: msg="{{foo | default('default value')}}"
+  - name: display defaut value
+    debug: msg="{{test | default('default value')}}"

@@ -1,0 +1,4 @@
+- name: Install the httpd rpm
+    yum: name=httpd
+- name: start the httpd service
+    service: name=httpd state=started

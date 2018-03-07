@@ -1,0 +1,6 @@
+--- 
+- name: "test 5" 
+  hosts: ansible-1
+  tasks:
+    - name: test
+      debug: msg="{{[3,4,2,12,1,54,1,4] | unique}}"

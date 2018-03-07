@@ -1,0 +1,14 @@
+--- 
+- name: Generer cles
+  hosts: localhost
+
+  roles:
+    - generatessh
+
+- name: "Install httpd" 
+  hosts: ansible-1
+  become: true
+
+  roles:
+    - httpd
+    - adduser

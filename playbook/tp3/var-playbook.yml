@@ -1,0 +1,14 @@
+---
+- name: Test vars
+  hosts: ansible-1
+  vars_prompt:
+
+  - name: "firstname"
+    prompt: "What is your first name?"
+  - name: "lastname"
+    prompt: "What is your last name?"
+  tasks:    
+  - name:   
+    debug: msg='{{lastname}}' 
+
+
