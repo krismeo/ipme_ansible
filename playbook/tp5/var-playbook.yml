@@ -1,6 +1,7 @@
 --- 
 - name: "test 5" 
   hosts: ansible-1
+  strategy: debug
   tasks:
     - name: test
       command: /opt/myprog
