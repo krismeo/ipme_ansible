@@ -1,0 +1,27 @@
+[Unit]
+Description=Apache Tomcat 8.x Web Application Container
+Wants=network.target
+After=network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME=/busapps/dcvt/1.0/jdk1.8.0_161/jre
+Environment=CATALINA_PID=/busapps/dcvt/1.0/apache-tomcat-8.5.28/temp/tomcat.pid
+Environment=CATALINA_HOME=/busapps/dcvt/1.0/apache-tomcat-8.5.28
+Environment='CATALINA_OPTS=-Xms512M -Xmx512m -Djava.net.preferIPv4Stack=true'
+Environment='JAVA_OPTS=-Djava.awt.headless=true'
+
+ExecStart=/busapps/rjra/gbl0/1.0/apache-tomcat-8.5.28/bin/startup.sh
+ExecStop=/busapps/rjra/gbl0/1.0/apache-tomcat-8.5.28/bin/shutdown.sh
+SuccessExitStatus=143
+
+User=DCVTGBLA
+Group=DCVTGBLA
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+[root@VMExam 1.0]#

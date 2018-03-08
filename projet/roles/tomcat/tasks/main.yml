@@ -2,12 +2,52 @@
   group: name=DCVTGBLA
 
 - name: add user "DCVTGBLA"
-  user: name=DCVTGBLA group=DCVTGBLA home=/usr/share/DCVTGBLA createhome=no
-  become: True
-  become_method: sudo
+  user: name=DCVTGBLA group=DCVTGBLA home=/usr/share/DCVTGBLA
+
+- name: add group "tomcat"
+  group: name=tomcat
+
+- name: add user "tomcat"
+  user: name=tomcat group=tomcat home=/usr/share/tomcat
 
 - name: Download Tomcat
-  get_url: url=http://wwwftp.ciril.fr/pub/apache/tomcat/tomcat-8/v8.5.28/bin/apache-tomcat-8.5.28.tar.gz dest=/opt/apache-tomcat-8.5.28.tar.gz
+  get_url: url=http://wwwftp.ciril.fr/pub/apache/tomcat/tomcat-8/v8.5.28/bin/apache-tomcat-8.5.28.tar.gz dest=/busapps/dcvt/1.0/apache-tomcat-8.5.28.tar.gz
 
-- name: Extract archive
-  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-8.5.28.tar.gz -C /opt/ creates=/opt/apache-tomcat-8.5.28
+- name: Download TAR archive from oracle site.
+  get_url:
+    url: "http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz"
+    headers: "Cookie:oraclelicense=accept-securebackup-cookie"
+    dest: "/busapps/dcvt/1.0/jdk-8u161-linux-x64.tar.gz"
+    force: no
+    validate_certs: no
+    timeout: 600
+
+- name: Unarchive JDK.
+  unarchive:
+    src: "/busapps/dcvt/1.0/jdk-8u161-linux-x64.tar.gz"
+    dest: "/busapps/dcvt/1.0/"
+    copy: no
+
+- name: Unarchive Tomcat
+  unarchive:
+    src: "/busapps/dcvt/1.0/apache-tomcat-8.5.28.tar.gz"
+    dest: "/busapps/dcvt/1.0/"
+    copy: no
+
+- name: Remove downloaded TAR JDK archive.
+  file:
+    path: "/busapps/dcvt/1.0/jdk-8u161-linux-x64.tar.gz"
+    state: absent
+
+- name: Remove downloaded TAR Tomacat archive.
+  file:
+    path: "/busapps/dcvt/1.0/apache-tomcat-8.5.28.tar.gz"
+    state: absent
+
+- file:
+    src: /busapps/dcvt/1.0/apache-tomcat-8.5.28/logs
+    dest: /busdata/dcvt/1.0/logs
+    owner: DCVTGBLA
+    group: DCVTGBLA
+    state: link
+

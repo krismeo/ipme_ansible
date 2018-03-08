@@ -1,7 +1,7 @@
 - name: creating volume group
   lvg:
     vg: volumegroup
-    pvs: /dev/sda
+    pvs: /dev/sdc
 
 - name: creating logical volume busapps
   lvol:
@@ -87,5 +87,22 @@
 
 - name: mounting new filesystem
   mount: name=/busdata/dcvt/1.0/logs src=/dev/volumegroup/busdata_dcvt_1.0_logs fstype=ext4 state=mounted
+
+- file:
+    path: /busapps/dcvt/1.0
+    owner: DCVTGBLA
+    group: DCVTGBLA
+
+- file:
+    path: /busdata/dcvt/1.0/data
+    owner: DCVTGBLA
+    group: DCVTGBLA
+
+- file:
+    path: /busdata/dcvt/1.0/logs
+    owner: DCVTGBLA
+    group: DCVTGBLA 
+
+
 
 

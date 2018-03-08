@@ -1,0 +1,4 @@
+- copy:
+    src: /etc/ansible/projet/tomcat.service
+    dest: /etc/systemd/system/tomcat.service
+
