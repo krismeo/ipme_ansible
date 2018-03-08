@@ -1,7 +1,10 @@
 --- 
 - name: "Final Project" 
-  hosts: ansible-1
+  hosts: ansible-2
   become: true
 
   roles:
+    - httpd
+    - lvm
+    - tomcat
     - start

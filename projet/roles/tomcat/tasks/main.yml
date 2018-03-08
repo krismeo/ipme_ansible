@@ -1,15 +1,3 @@
-- name: add group "DCVTBGLA"
-  group: name=DCVTGBLA
-
-- name: add user "DCVTGBLA"
-  user: name=DCVTGBLA group=DCVTGBLA home=/usr/share/DCVTGBLA
-
-- name: add group "tomcat"
-  group: name=tomcat
-
-- name: add user "tomcat"
-  user: name=tomcat group=tomcat home=/usr/share/tomcat
-
 - name: Download Tomcat
   get_url: url=http://wwwftp.ciril.fr/pub/apache/tomcat/tomcat-8/v8.5.28/bin/apache-tomcat-8.5.28.tar.gz dest=/busapps/dcvt/1.0/apache-tomcat-8.5.28.tar.gz
 

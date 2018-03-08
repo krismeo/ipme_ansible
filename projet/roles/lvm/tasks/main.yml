@@ -1,3 +1,15 @@
+- name: add group "DCVTBGLA"
+  group: name=DCVTGBLA
+
+- name: add user "DCVTGBLA"
+  user: name=DCVTGBLA group=DCVTGBLA home=/usr/share/DCVTGBLA
+
+- name: add group "tomcat"
+  group: name=tomcat
+
+- name: add user "tomcat"
+  user: name=tomcat group=tomcat home=/usr/share/tomcat
+
 - name: creating volume group
   lvg:
     vg: volumegroup
