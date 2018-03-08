@@ -23,11 +23,11 @@
 - name: creating logical volume busapps/dcvt/1.0
   lvol:
     vg: volumegroup
-    lv: busapps/dcvt/1.0
+    lv: busapps_dcvt_1.0
     size: 1000
 
 - name: creating new filesystem on logical volume busapps/dcvt/1.0
-  filesystem: fstype='ext4' dev=/dev/volumegroup/busapps/dcvt/1.0
+  filesystem: fstype='ext4' dev=/dev/volumegroup/busapps_dcvt_1.0
 
 - name: create directory
   file:
@@ -35,4 +35,57 @@
     state: directory
 
 - name: mounting new filesystem
-  mount: name=/busapps/dcvt/1.0 src=/dev/volumegroup/busapps/dcvt/1.0 fstype=ext4 state=mounted
+  mount: name=/busapps/dcvt/1.0 src=/dev/volumegroup/busapps_dcvt_1.0 fstype=ext4 state=mounted
+
+- name: creating logical volume busdata
+  lvol:
+    vg: volumegroup
+    lv: busdata
+    size: 1000
+
+- name: creating new filesystem on logical volume busdata
+  filesystem: fstype='ext4' dev=/dev/volumegroup/busdata
+
+- name: create directory
+  file:
+    path: /busdata
+    state: directory
+
+- name: mounting new filesystem
+  mount: name=/busdata src=/dev/volumegroup/busdata fstype=ext4 state=mounted
+
+- name: creating logical volume busdata/dcvt/1.0/data
+  lvol:
+    vg: volumegroup
+    lv: busdata_dcvt_1.0_data
+    size: 5000
+
+- name: creating new filesystem on logical volume busdata/dcvt/1.0/data
+  filesystem: fstype='ext4' dev=/dev/volumegroup/busdata_dcvt_1.0_data
+
+- name: create directory busdata/dcvt/1.0/data
+  file:
+    path: /busdata/dcvt/1.0/data
+    state: directory
+
+- name: mounting new filesystem
+  mount: name=/busdata/dcvt/1.0/data src=/dev/volumegroup/busdata_dcvt_1.0_data fstype=ext4 state=mounted
+
+- name: creating logical volume busdata/dcvt/1.0/logs
+  lvol:
+    vg: volumegroup
+    lv: busdata_dcvt_1.0_logs
+    size: 2000
+
+- name: creating new filesystem on logical volume busdata/dcvt/1.0/logs
+  filesystem: fstype='ext4' dev=/dev/volumegroup/busdata_dcvt_1.0_logs
+
+- name: create directory busdata/dcvt/1.0/logs
+  file:
+    path: /busdata/dcvt/1.0/logs
+    state: directory
+
+- name: mounting new filesystem
+  mount: name=/busdata/dcvt/1.0/logs src=/dev/volumegroup/busdata_dcvt_1.0_logs fstype=ext4 state=mounted
+
+
