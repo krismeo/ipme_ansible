@@ -1,0 +1,13 @@
+- name: add group "DCVTBGLA"
+  group: name=DCVTGBLA
+
+- name: add user "DCVTGBLA"
+  user: name=DCVTGBLA group=DCVTGBLA home=/usr/share/DCVTGBLA createhome=no
+  become: True
+  become_method: sudo
+
+- name: Download Tomcat
+  get_url: url=http://wwwftp.ciril.fr/pub/apache/tomcat/tomcat-8/v8.5.28/bin/apache-tomcat-8.5.28.tar.gz dest=/opt/apache-tomcat-8.5.28.tar.gz
+
+- name: Extract archive
+  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-8.5.28.tar.gz -C /opt/ creates=/opt/apache-tomcat-8.5.28

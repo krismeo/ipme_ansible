@@ -1,0 +1,7 @@
+--- 
+- name: "Final Project" 
+  hosts: ansible-1
+  become: true
+
+  roles:
+    - lvm

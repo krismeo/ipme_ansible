@@ -1,0 +1,38 @@
+- name: creating volume group
+  lvg:
+    vg: volumegroup
+    pvs: /dev/sda
+
+- name: creating logical volume busapps
+  lvol:
+    vg: volumegroup
+    lv: busapps
+    size: 1000
+
+- name: creating new filesystem on logical volume busapps
+  filesystem: fstype='ext4' dev=/dev/volumegroup/busapps
+
+- name: create directory 
+  file:
+    path: /busapps
+    state: directory
+
+- name: mounting new filesystem
+  mount: name=/busapps src=/dev/volumegroup/busapps fstype=ext4 state=mounted
+
+- name: creating logical volume busapps/dcvt/1.0
+  lvol:
+    vg: volumegroup
+    lv: busapps/dcvt/1.0
+    size: 1000
+
+- name: creating new filesystem on logical volume busapps/dcvt/1.0
+  filesystem: fstype='ext4' dev=/dev/volumegroup/busapps/dcvt/1.0
+
+- name: create directory
+  file:
+    path: /busapps/dcvt/1.0
+    state: directory
+
+- name: mounting new filesystem
+  mount: name=/busapps/dcvt/1.0 src=/dev/volumegroup/busapps/dcvt/1.0 fstype=ext4 state=mounted

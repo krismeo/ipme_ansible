@@ -1,0 +1,8 @@
+- name: test exist
+  stat: 
+    path: ~/.ssh/id_rsa_new
+  register: file_exist
+
+- name: Creating pub SSH keys
+  command: ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa_new
+  when: file_exist.stat.exists == false

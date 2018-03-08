@@ -1,0 +1,10 @@
+- user:
+    name: test1
+
+- name: copy key
+  authorized_key: 
+    user: test1
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa_new.pub') }}"
+    exclusive: True
+    
